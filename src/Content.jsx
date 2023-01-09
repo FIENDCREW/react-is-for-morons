@@ -1,29 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./App.css";
 import logo from "./logo.svg";
+import { FaTrashAlt} from 'react-icons/fa'
 
 const Content = () => {
-  const handleNameChange = () => {
-    const names = ["Bob", "Kevin", "Dave"];
-    const int = Math.floor(Math.random() * 3);
-    return names[int];
-  };
-  const heandleClick = () => {
-    console.log("You clicked it")
-  };
-  const heandleClick2 = (name) => {
-    console.log(`${name} was clicked`)
-  };
-  const heandleClick3 = (e) => {
-    console.log(e.target.innerText)
+  const [ items, setItems ] = useState([
+    {
+      id:1,
+      checked: false,
+      item: 'One half pound bag Cocoa Covered Amonds Unsalted'
+    },
+    {
+      id:2,
+      checked: false,
+      item: 'Items 2'
+    },
+    {
+      id:3,
+      checked: false,
+      item: 'Items 3'
+    },
+  ]);
+  const handleCheck = (id) => {
+    const listItems = items.map((item) => item.id === id? {...item,checked:!item.checked} : item)
+    setItems(listItems);
+    localStorage.setItem('choppinglist', JSON.stringify(listItems));
   };
   return (
     <main className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <p onDoubleClick={heandleClick}>Hello {handleNameChange()}!</p>
-      <button onClick={heandleClick}> Click It </button>
-      <button onClick={() => {heandleClick2(handleNameChange())}}> Click It </button>
-      <button onClick={(e) => heandleClick3(e)}> Click It </button>
+      <ul>
+        {items.map((item) => (
+          <li className='item' key={item.id}>
+            <input 
+              type="checkbox" 
+              onChange={()=> handleCheck(item.id)}
+              checked={item.checked} />
+            <label
+              style={(item.checked) ? {textDecoration: "line-through"} : null}
+              onDoubleClick={() => handleCheck(item.id)}>{item.item}</label>
+            <FaTrashAlt 
+              role="button" 
+              tabIndex="0"
+            />
+          </li>
+        ))}
+
+      </ul>
     </main>
   );
 };
