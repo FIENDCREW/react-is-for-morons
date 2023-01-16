@@ -5,7 +5,7 @@ import ItenList from "./ItenList";
 
 
 
-const Content = ({items, setItems, handleCheck, handkeDelete}) => {
+const Content = ({items, handleCheck, handkeDelete}) => {
   return (
     <main className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
