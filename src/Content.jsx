@@ -7,7 +7,7 @@ import ItenList from "./ItenList";
 
 const Content = ({items, handleCheck, handkeDelete}) => {
   return (
-    <main className="App-header">
+    <>
       <img src={logo} className="App-logo" alt="logo" />
       {items.length ? (
         <ItenList 
@@ -19,7 +19,7 @@ const Content = ({items, handleCheck, handkeDelete}) => {
           <p style={{marginTop: '2rem'}}>Your list is empty</p>
         )
       }
-    </main>
+    </>
   );
 };
 
